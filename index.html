@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LIPIGENOMICS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="sitename">LIPIGENOMICS</span>
+    </div>
+    <nav class="nav">
+      <a href="#" class="pill">Home</a>
+      <a href="#" class="pill">About</a>
+      <a href="#" class="pill">Research</a>
+      <a href="#" class="pill active">Portfolio</a>
+      <a href="#" class="pill">Books</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <!-- DNA motif SVG (simple, decorative) -->
+      <svg class="dna" viewBox="0 0 200 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0%" stop-color="#2fd6c7" />
+            <stop offset="100%" stop-color="#8c6df0" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="b" />
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </feMerge>
+        </defs>
+        <!-- vertical dots and bars -->
+        <g stroke="#1f3a3a" stroke-width="2" fill="none" opacity="0.85">
+          <!-- repeated pattern -->
+          <g class="rung" transform="translate(20,40)">
+            <line x1="10" x2="190" stroke="#144" stroke-opacity="0.25" />
+            <circle cx="10" cy="0" r="3" fill="#8c6df0" filter="url(#glow)" />
+            <circle cx="190" cy="0" r="3" fill="#2fd6c7" filter="url(#glow)" />
+          </g>
+          <!-- duplicate using CSS to space them -->
+        </g>
+      </svg>
+
+      <!-- colorful squiggles -->
+      <svg class="squiggles" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <path class="sq1" d="M50 220 C150 80, 250 300, 350 200 S550 280, 750 150" stroke="#2fd6c7" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95" />
+        <path class="sq2" d="M150 260 C250 120, 350 340, 450 240 S650 320, 750 210" stroke="#8c6df0" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.9" />
+        <path class="sq3" d="M250 240 C350 100, 450 320, 550 220 S750 300, 850 200" stroke="#e07b8a" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.9" />
+      </svg>
+
+      <div class="hero-text">
+        <div class="subtitle">SEQUENCING IDENTITY</div>
+        <h1 class="title">LIPIGENOMICS</h1>
+      </div>
+    </section>
+
+    <section class="projects">
+      <h2 class="section-title">Projects</h2>
+      <p class="lead">Tools and experiments built while studying bioinformatics — mostly small, mostly open source.</p>
+
+      <div class="cards">
+        <article class="card">
+          <h3>Genome Variant Explorer</h3>
+          <p>A web tool for visualizing and filtering short-read sequencing variant calls, built to make VCF exploration accessible without command-line tools.</p>
+          <div class="tags"><span>Python</span><span>Bioinformatics</span><span>React</span><span>Data Visualization</span></div>
+          <div class="links">🔗 <a href="#">GitHub</a></div>
+        </article>
+
+        <article class="card">
+          <h3>Codon Usage Analyzer</h3>
+          <p>A command-line and web toolkit for computing codon usage bias across FASTA sequence sets, used for a coursework project on gene expression prediction.</p>
+          <div class="tags"><span>Python</span><span>FASTA</span><span>Statistics</span></div>
+          <div class="links">🔗 <a href="#">GitHub</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="members-section">
+      <h2 class="section-title">Members</h2>
+      <div id="members" class="members-grid">Loading members…</div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 LIPIGENOMICS · Founder — Ronak Singh Shekhawat · B.Tech in Bioinformatics (ongoing), Amity University Rajasthan</p>
+    <p class="foot-links">GitHub &nbsp; Resume &nbsp; Contact</p>
+  </footer>
+
+  <script>
+    // simple members loader
+    fetch('members.json').then(r=>r.json()).then(data=>{
+      const root = document.getElementById('members');
+      root.innerHTML = '';
+      data.forEach(m=>{
+        const card = document.createElement('div');
+        card.className = 'member-card';
+        card.innerHTML = `
+          <img class="avatar" src="${m.avatar||'https://via.placeholder.com/96'}" alt="${m.name}">
+          <div class="m-info"><h3>${m.name}</h3><div class="role">${m.role}</div><p class="bio">${m.bio}</p>
+          <div class="m-links"><a href="${m.links.github||'#'}">GitHub</a> ${m.links.email?'<a href="'+m.links.email+'">Email</a>':''}</div></div>`;
+        root.appendChild(card);
+      })
+    }).catch(err=>{document.getElementById('members').innerText='No members found.'})
+  </script>
+</body>
+</html>

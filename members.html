@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Members — LIPIGENOMICS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand"><span class="dot"></span><span class="sitename">LIPIGENOMICS</span></div>
+  </header>
+  <main style="padding:20px">
+    <h1 class="section-title">Members</h1>
+    <div id="members" class="members-grid">Loading…</div>
+  </main>
+  <script>
+    fetch('members.json').then(r=>r.json()).then(data=>{
+      const root = document.getElementById('members');
+      root.innerHTML = '';
+      data.forEach(m=>{
+        const card = document.createElement('div');
+        card.className = 'member-card';
+        card.innerHTML = `
+          <img class="avatar" src="${m.avatar||'https://via.placeholder.com/96'}" alt="${m.name}">
+          <div class="m-info"><h3>${m.name}</h3><div class="role">${m.role}</div><p class="bio">${m.bio}</p>
+          <div class="m-links"><a href="${m.links.github||'#'}">GitHub</a> ${m.links.email?'<a href="'+m.links.email+'">Email</a>':''}</div></div>`;
+        root.appendChild(card);
+      })
+    }).catch(()=>document.getElementById('members').innerText='No members found.')
+  </script>
+</body>
+</html>
