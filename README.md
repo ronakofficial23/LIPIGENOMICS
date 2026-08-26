@@ -1,35 +1,29 @@
-# LIPIGENOMICS
+# lipigenomics — static site
 
-This repository is a private scaffold for the LIPIGENOMICS website — a dark, mobile-first site with an animated DNA hero and an upload/dashboard scaffold.
+This branch adds a mobile-first static site with a hero (DNA motif + title), project cards and a JSON-driven members page.
 
-What is included
-- Next.js app (pages-based)
-- Tailwind CSS config and global styles
-- Animated DNA hero component (components/DNAAnimation.js)
-- Dashboard scaffold (pages/dashboard.js) with instructions to wire Supabase
-- Supabase client helper at lib/supabase.js (no keys committed)
+Files added:
+- index.html — main page with hero, projects and members section.
+- members.html — standalone members page that reads members.json.
+- members.json — editable list of members (one example entry included).
+- styles.css — theme and layout.
 
-Quick setup (local)
-1. Clone this private repo to your machine.
-2. Install dependencies: `npm install`
-3. Create a local env file `.env.local` and add:
+How to preview locally
+1. Clone the repo and checkout the `feature/hero-and-members` branch:
 
-```
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=public-anon-key
-```
+   git clone https://github.com/ronakofficial23/lipigenomics.git
+   git checkout feature/hero-and-members
 
-4. Run locally: `npm run dev` and open http://localhost:3000
+2. Open `index.html` in a browser (static files only).
 
-Supabase and uploads
-- The project includes a simple supabase client helper but does not include any keys.
-- To enable uploads & auth, create a Supabase project, then set the two env variables above in your hosting provider (Vercel/Netlify) or locally.
+Enable GitHub Pages (optional)
+- In the repository's Settings → Pages, set the source to the `feature/hero-and-members` branch (or merge to default branch and use that).
+- The site will be published at `https://<your-username>.github.io/lipigenomics/` once Pages builds.
 
-Deployment
-- Recommended: Vercel. Connect your GitHub account, import the repository, and add the two env variables in Vercel project settings.
+Editing members
+- Edit `members.json` in the repository (via web editor or locally) to add/remove members. Each entry should look like the example in `members.json`.
 
-Next steps I can do for you (reply if you want any of these):
-- Wire full authentication (email sign-in) and upload UI (file listing, private/public toggles).
-- Add admin user roles and an approvals workflow for public downloads.
-- Create a one-click Vercel deploy configuration and deploy a demo site for review.
-
+Next steps I recommend
+- Review the branch and open a PR to merge into your default branch.
+- Replace placeholder avatars with real images in `assets/` and update `members.json`.
+- (Optional) Deploy from the default branch and enable GitHub Pages for the final live URL.
