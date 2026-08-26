@@ -27,3 +27,7 @@ Next steps I recommend
 - Review the branch and open a PR to merge into your default branch.
 - Replace placeholder avatars with real images in `assets/` and update `members.json`.
 - (Optional) Deploy from the default branch and enable GitHub Pages for the final live URL.
+
+
+
+(Trivial edit to force Pages rebuild)
